@@ -262,12 +262,38 @@ public class GameEngine extends SurfaceView implements Runnable {
 
             if (this.enemy1.getHitbox().intersect(bullet)) {
               enemyList.remove(enemy1);
-              bullets.remove(bullet);
+              this.player.getBullets().remove(bullet);
                 this.player.updateHitbox();
                 lives = lives - 1;
             }
 
         }
+        // COLLISION DETECTION BETWEEN BULLET AND enemy
+        for (int i = 0; i < this.player.getBullets().size();i++) {
+            Rect bullet = this.player.getBullets().get(i);
+
+            if (this.enemy2.getHitbox().intersect(bullet)) {
+                enemyList.remove(enemy2);
+                this.player.getBullets().remove(bullet);
+                this.player.updateHitbox();
+                lives = lives - 1;
+            }
+
+        }
+
+        // COLLISION DETECTION BETWEEN BULLET AND enemy
+        for (int i = 0; i < this.player.getBullets().size();i++) {
+            Rect bullet = this.player.getBullets().get(i);
+
+            if (this.enemy3.getHitbox().intersect(bullet)) {
+                enemyList.remove(enemy3);
+                this.player.getBullets().remove(bullet);
+                this.player.updateHitbox();
+                lives = lives - 1;
+            }
+
+        }
+
 
 
 
@@ -299,18 +325,6 @@ public class GameEngine extends SurfaceView implements Runnable {
 
         }
 
-//        // COLLISION DETECTION BETWEEN BULLET AND PLAYER
-//        for (int i = 0; i < this.player.getBullets().size();i++) {
-//            Rect bullet = this.player.getBullets().get(i);
-//
-//            if (this.player.getHitbox().intersect(bullet)) {
-//                this.player.setxPosition(100);
-//                this.player.setyPosition(600);
-//                this.player.updateHitbox();
-//                lives = lives - 1;
-//            }
-//
-//        }
 
 
 
@@ -419,7 +433,7 @@ public class GameEngine extends SurfaceView implements Runnable {
             // draw the player's hitbox
             canvas.drawRect(player.getHitbox(), paintbrush);
 
-//drawing the array of eneimes
+            //drawing the array of eneimes
 
             for (int i = 0; i < enemyList.size(); i++) {
                 Enemy b = enemyList.get(i);
@@ -431,12 +445,6 @@ public class GameEngine extends SurfaceView implements Runnable {
             }
 
 
-
-            // draw enemy 2 on the screen
-            // draw the enemy graphic on the screen
-//            canvas.drawBitmap(enemy2.getImage(), enemy2.getxPosition(), enemy2.getyPosition(), paintbrush);
-//            // 2. draw the enemy's hitbox
-//            canvas.drawRect(enemy2.getHitbox(), paintbrush);
 
             // draw bullet on screen
             for (int i = 0; i < this.enemy1.getBullets().size(); i++) {
@@ -455,15 +463,15 @@ public class GameEngine extends SurfaceView implements Runnable {
             paintbrush.setColor(Color.YELLOW);
             paintbrush.setTextSize(60);
             canvas.drawText("Lives remaining: " + lives,
-                    1100,
-                    800,
+                    100,
+                    200,
                     paintbrush
             );
 
 
             canvas.drawText("Bullets: " + this.enemy1.getBullets().size(),
-                    1100,
-                    720,
+                    100,
+                    400,
                     paintbrush
             );
 
