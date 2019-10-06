@@ -13,12 +13,11 @@ public class Player {
     private Bitmap image;
     private Rect hitbox;
 
-    private int xPosition;
-    private int yPosition;
+    public int xPosition;
+    public int yPosition;
 
     private ArrayList<Rect> bullets = new ArrayList<Rect>();
     private final int BULLET_WIDTH = 15;
-
 
     public Player(Context context, int x, int y) {
         // 1. set up the initial position of the Enemy
@@ -95,11 +94,26 @@ public class Player {
 
     public void spawnBullet() {
         // make bullet come out of middle of enemty
-        Rect bullet = new Rect(this.xPosition,
+        Rect bullet = new Rect(this.xPosition + image.getWidth(),
                 this.yPosition + this.image.getHeight() / 2,
-                this.xPosition + BULLET_WIDTH,
+                this.xPosition + BULLET_WIDTH + image.getWidth(),
                 this.yPosition + this.image.getHeight() / 2 + BULLET_WIDTH
         );
+
         this.bullets.add(bullet);
     }
+
+
+    public void touchDown(float tx,float ty){
+
+    }
+
+//    public void touchMove(float tx,float ty){
+//        player.xPosition = (int) tx;
+//        player.yPosition = (int) ty;
+//    }
+    public void touchRelease(float tx,float ty){
+
+    }
+
 }

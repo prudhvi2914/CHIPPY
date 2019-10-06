@@ -13,6 +13,7 @@ public class Enemy {
     // Image
     // Hitbox
     private Bitmap image;
+    private Bitmap bullet;
     private Rect hitbox;
 
     private int xPosition;
@@ -31,7 +32,8 @@ public class Enemy {
         this.yPosition = y;
 
         // 2. Set the default image - all enemies have same image
-        this.image = BitmapFactory.decodeResource(context.getResources(), R.drawable.alien_ship2);
+        this.image = BitmapFactory.decodeResource(context.getResources(), R.drawable.alien_ship1);
+        this.bullet = BitmapFactory.decodeResource(context.getResources(), R.drawable.alienbullet);
 
         // 3. Set the default hitbox - all enemies have same hitbox
         this.hitbox = new Rect(
@@ -105,6 +107,10 @@ public class Enemy {
                 this.xPosition + BULLET_WIDTH,
                 this.yPosition + this.image.getHeight() / 2 + BULLET_WIDTH
         );
+
+
+
+
         this.bullets.add(bullet);
     }
 
