@@ -22,12 +22,12 @@ public class Player {
     private ArrayList<Rect> bullets = new ArrayList<Rect>();
     private final int BULLET_WIDTH = 15;
 
-    public Player(Context context, int x, int y) {
+    public Player(Context context, int x, int y,int width,int speed) {
         // 1. set up the initial position of the Enemy
         this.xPosition = x;
         this.yPosition = y;
-//        this.width = width;
-//        this.speed = speed;
+        this.width = width;
+        this.speed = speed;
 
         // 2. Set the default image - all enemies have same image
         this.image = BitmapFactory.decodeResource(context.getResources(), R.drawable.player_ship);

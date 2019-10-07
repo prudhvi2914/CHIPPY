@@ -20,11 +20,6 @@ import static com.example.tappyspaceship01.R.drawable.eye;
 
 public class GameEngine extends SurfaceView implements Runnable {
 
-    public   Bitmap image;
-    int tx;
-int ty;
-
-
 
     // Android debug variables
     final static String TAG="TAPPY-SPACESHIP";
@@ -44,19 +39,8 @@ int ty;
     SurfaceHolder holder;
     Canvas canvas;
     Paint paintbrush;
-
-
-
-    // -----------------------------------
-    // GAME SPECIFIC VARIABLES
-    // -----------------------------------
     List<Enemy> enemyList = new ArrayList<Enemy>();
-    // ----------------------------
-    // ## SPRITES
-    // ----------------------------
     ArrayList<Rect> bullets = new ArrayList<Rect>();
-    // represent the TOP LEFT CORNER OF THE GRAPHIC
-//for toch event
     Player player;
     Enemy enemy1;
     Enemy enemy2;
@@ -71,9 +55,6 @@ int ty;
     Bitmap background;
     int bgXPosition = 0;
     int backgroundRightSide = 0;
-    // ----------------------------
-    // ## GAME STATS
-    // ----------------------------
 
     int lives = 10;
     int SQUARE_WIDTH = 10;
@@ -101,7 +82,7 @@ int ty;
 //int i =1;
 
         // put the initial starting position of your player and enemies
-        this.player = new Player(getContext(), 100, 600);
+        this.player = new Player(getContext(), 100, 300,SQUARE_WIDTH,2);
 
         this.enemy1 = new Enemy(getContext(), 1350, 300);
         this.enemy2 = new Enemy(getContext(), 1350, 140);
@@ -323,12 +304,17 @@ int ty;
 
         }
         // COLLISION DETECTION BETWEEN BULLET AND enemy
+
+
+
         for (int i = 0; i < this.player.getBullets().size();i++) {
             Rect bullet = this.player.getBullets().get(i);
 
             if (this.enemy1.getHitbox().intersect(bullet)) {
               enemyList.remove(enemy1);
-              this.player.getBullets().remove(bullet);
+                this.player.getBullets().remove(bullet);
+
+                this.enemy1.removeHitbox();
                 this.player.updateHitbox();
                 lives = lives - 1;
             }
@@ -342,12 +328,10 @@ int ty;
 
             if (this.enemy2.getHitbox().intersect(bullet)) {
                 enemyList.remove(enemy2);
-
                 this.player.getBullets().remove(bullet);
+                this.enemy2.removeHitbox();
                 this.player.updateHitbox();
                 lives = lives - 1;
-
-
                 this.enemy1.getBullets().remove(bullet);
 
             }
@@ -361,6 +345,7 @@ int ty;
             if (this.enemy3.getHitbox().intersect(bullet)) {
                 enemyList.remove(enemy3);
                 this.player.getBullets().remove(bullet);
+                this.enemy3.removeHitbox();
                 this.player.updateHitbox();
                 lives = lives - 1;
             }
@@ -373,6 +358,7 @@ int ty;
             if (this.enemy4.getHitbox().intersect(bullet)) {
                 enemyList.remove(enemy4);
                 this.player.getBullets().remove(bullet);
+                this.enemy4.removeHitbox();
                 this.player.updateHitbox();
                 lives = lives - 1;
             }
@@ -385,6 +371,7 @@ int ty;
             if (this.enemy5.getHitbox().intersect(bullet)) {
                 enemyList.remove(enemy5);
                 this.player.getBullets().remove(bullet);
+                this.enemy5.removeHitbox();
                 this.player.updateHitbox();
                 lives = lives - 1;
             }
@@ -397,6 +384,7 @@ int ty;
             if (this.enemy6.getHitbox().intersect(bullet)) {
                 enemyList.remove(enemy6);
                 this.player.getBullets().remove(bullet);
+                this.enemy6.removeHitbox();
                 this.player.updateHitbox();
                 lives = lives - 1;
             }
@@ -409,6 +397,8 @@ int ty;
             if (this.enemy7.getHitbox().intersect(bullet)) {
                 enemyList.remove(enemy7);
                 this.player.getBullets().remove(bullet);
+                this.enemy7.removeHitbox();
+
                 this.player.updateHitbox();
                 lives = lives - 1;
             }
@@ -421,6 +411,8 @@ int ty;
             if (this.enemy8.getHitbox().intersect(bullet)) {
                 enemyList.remove(enemy8);
                 this.player.getBullets().remove(bullet);
+                this.enemy8.removeHitbox();
+
                 this.player.updateHitbox();
                 lives = lives - 1;
             }
@@ -432,6 +424,7 @@ int ty;
             if (this.enemy9.getHitbox().intersect(bullet)) {
                 enemyList.remove(enemy9);
                 this.player.getBullets().remove(bullet);
+                this.enemy9.removeHitbox();
                 this.player.updateHitbox();
                 lives = lives - 1;
             }

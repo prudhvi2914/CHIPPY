@@ -97,6 +97,12 @@ public class Enemy {
         this.hitbox.right = this.xPosition + this.image.getWidth();
         this.hitbox.bottom = this.yPosition + this.image.getHeight();
     }
+    public void removeHitbox() {
+        this.hitbox.left = 0;
+        this.hitbox.top = 0;
+        this.hitbox.right = 0;
+        this.hitbox.bottom = 0;
+    }
 
     // Make a new bullet
     public void spawnBullet() {
