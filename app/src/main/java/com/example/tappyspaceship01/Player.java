@@ -15,6 +15,9 @@ public class Player {
 
     public int xPosition;
     public int yPosition;
+    public int width;
+    private int speed;
+
 
     private ArrayList<Rect> bullets = new ArrayList<Rect>();
     private final int BULLET_WIDTH = 15;
@@ -23,6 +26,8 @@ public class Player {
         // 1. set up the initial position of the Enemy
         this.xPosition = x;
         this.yPosition = y;
+//        this.width = width;
+//        this.speed = speed;
 
         // 2. Set the default image - all enemies have same image
         this.image = BitmapFactory.decodeResource(context.getResources(), R.drawable.player_ship);
@@ -36,6 +41,16 @@ public class Player {
         );
     }
 
+
+    public int getSpeed() {
+        return this.speed;
+    }
+    public int getWidth() {
+        return width;
+    }
+    public void setWidth(int width) {
+        this.width = width;
+    }
 
     // GETTER AND SETTER METHODS
     public Bitmap getImage() {
@@ -104,15 +119,16 @@ public class Player {
     }
 
 
-    public void touchDown(float tx,float ty){
+    public static void touchDown(float tx,float ty){
 
     }
 
-//    public void touchMove(float tx,float ty){
+    public static void touchMove(float tx, float ty){
 //        player.xPosition = (int) tx;
+
 //        player.yPosition = (int) ty;
-//    }
-    public void touchRelease(float tx,float ty){
+    }
+    public static void touchRelease(float tx,float ty){
 
     }
 
