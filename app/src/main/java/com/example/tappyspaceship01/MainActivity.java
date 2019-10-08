@@ -7,6 +7,14 @@ import android.view.Display;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
+    Display display;
+    Point size;
+    int screenHeight;
+    int screenWidth;
+
+
     GameEngine tappySpaceship;
 
     @Override
@@ -17,10 +25,12 @@ public class MainActivity extends AppCompatActivity {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
+        screenWidth = size.x;
+        screenHeight = size.y;
 
         // Initialize the GameEngine object
         // Pass it the screen size (height & width)
-        tappySpaceship = new GameEngine(this, size.x, size.y);
+        tappySpaceship = new GameEngine(this, screenWidth, screenHeight);
 
         // Make GameEngine the view of the Activity
         setContentView(tappySpaceship);

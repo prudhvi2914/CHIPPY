@@ -16,8 +16,8 @@ public class Enemy {
     private Bitmap bullet;
     private Rect hitbox;
 
-    private int xPosition;
-    private int yPosition;
+    public int xPosition;
+    public int yPosition;
 
     // Give your enemy some bullets
     // I am using a Rect object because I am lazy and
