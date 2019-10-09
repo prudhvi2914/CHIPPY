@@ -98,10 +98,10 @@ public class Enemy {
         this.hitbox.bottom = this.yPosition + this.image.getHeight();
     }
     public void removeHitbox() {
-        this.hitbox.left = 0;
-        this.hitbox.top = 0;
-        this.hitbox.right = 0;
-        this.hitbox.bottom = 0;
+        this.hitbox.left = -3000;
+        this.hitbox.top = -3000;
+        this.hitbox.right = -3000;
+        this.hitbox.bottom = -3000;
     }
 
     // Make a new bullet

@@ -22,12 +22,14 @@ public class GameEngine extends SurfaceView implements Runnable {
 
 
     // Android debug variables
-    final static String TAG="TAPPY-SPACESHIP";
+    final static String TAG = "TAPPY-SPACESHIP";
 
     // screen size
     int screenHeight;
     int screenWidth;
-
+    int hp;
+    int score;
+    int highScore = 0;
     // game state
     boolean gameIsRunning;
 
@@ -44,19 +46,9 @@ public class GameEngine extends SurfaceView implements Runnable {
     ArrayList<Rect> bullets = new ArrayList<Rect>();
 
     //------------------------------------------------------
-    Square bullet;
-    Square bullet1;
-    Square bullet2;
-    Square bullet3;
-    Square bullet4;
-    Square bullet5;
-    Square bullet6;
-
     // Array of Bullets
     ArrayList<Square> bull = new ArrayList<Square>();
     Square enemy;
-
-Square b;
 
     //------------------------------------------------
     Player player;
@@ -75,8 +67,7 @@ Square b;
     int backgroundRightSide = 0;
 
     int lives = 10;
-  //  int SQUARE_WIDTH = 50;
-
+    //  int SQUARE_WIDTH = 50;
 
 
     public GameEngine(Context context, int w, int h) {
@@ -94,26 +85,25 @@ Square b;
 
 //----------------------------------------------------------------------
         int SQUARE_WIDTH = 100;
-        // initalize sprites
-        // lets make 6 bullets
-        int bulletStartX = 100;
-
-        // make 10 bullets
-        int baseSpeed = 2;
-
-        for (int j = 1; j <= 1; j++) {
-            Square b = new Square(context, 100, 300, SQUARE_WIDTH, 20*j);
-            this.bull.add(b);
-        }
-
-        this.enemy = new Square(context, 1350, 300, SQUARE_WIDTH, 0);
+//        // initalize sprites
+//        // lets make 6 bullets
+//        int bulletStartX = 100;
+//
+//        // make 10 bullets
+//        int baseSpeed = 2;
+//
+//        for (int j = 1; j <= 1; j++) {
+//            Square b = new Square(context, 100, 300, SQUARE_WIDTH, 20*j);
+//            this.bull.add(b);
+//        }
+//
+//        this.enemy = new Square(context, 1350, 300, SQUARE_WIDTH, 0);
         //----------------------------------------------------------------
 
         // @TODO: Add your sprites
 
 
-            this.player = new Player(context, 100, 300, SQUARE_WIDTH, 2);
-
+        this.player = new Player(context, 100, 300, SQUARE_WIDTH, 2);
 
 
         // put the initial starting position of your player and enemies
@@ -142,7 +132,6 @@ Square b;
         enemyList.add(enemy9);
 
 
-
         // setup the background
         this.background = BitmapFactory.decodeResource(context.getResources(), R.drawable.back1);
         // dynamically resize the background to fit the device
@@ -158,50 +147,43 @@ Square b;
     }
 
 
-//---------------------------
-public void moveBulletToTarget(Square bullet) {
-    // @TODO:  Move the square
-    // 1. calculate distance between bullet and square
-    double a = (enemy.xPosition - bullet.xPosition);
-    double b = (enemy.yPosition - bullet.yPosition);
-    double distance = Math.sqrt((a*a) + (b*b));
-
-    // 2. calculate the "rate" to move
-    double xn = (a / distance);
-    double yn = (b / distance);
-
-    // 3. move the bullet
-    bullet.xPosition = bullet.xPosition + (int)(xn * bullet.getSpeed());
-    bullet.yPosition = bullet.yPosition + (int)(yn * bullet.getSpeed());
-}
-
-
-    float mouseX;
-    float mouseY;
-
-
-    public void moveBulletToMouse(Square bullet, float mouseXPos, float mouseYPos) {  //player,player
-        // @TODO:  Move the square
-        // 1. calculate distance between bullet and square
-        double a = (mouseXPos - bullet.xPosition);
-        double b = (mouseYPos - bullet.yPosition);
-        double distance = Math.sqrt((a*a) + (b*b));
-
-        // 2. calculate the "rate" to move
-        double xn = (a / distance);
-        double yn = (b / distance);
-
-        // 3. move the bullet
-        bullet.xPosition = bullet.xPosition + (int)(xn * bullet.getSpeed());
-        bullet.yPosition = bullet.yPosition + (int)(yn * bullet.getSpeed());
-    }
+//---------------------------===============================================================
+//public void moveBulletToTarget(Square bullet) {
+//    // @TODO:  Move the square
+//    // 1. calculate distance between bullet and square
+//    double a = (enemy.xPosition - bullet.xPosition);
+//    double b = (enemy.yPosition - bullet.yPosition);
+//    double distance = Math.sqrt((a*a) + (b*b));
+//
+//    // 2. calculate the "rate" to move
+//    double xn = (a / distance);
+//    double yn = (b / distance);
+//
+//    // 3. move the bullet
+//    bullet.xPosition = bullet.xPosition + (int)(xn * bullet.getSpeed());
+//    bullet.yPosition = bullet.yPosition + (int)(yn * bullet.getSpeed());
+//}
+//
+//
+//    float mouseX;
+//    float mouseY;
+//
+//    public void moveBulletToMouse(Square bullet, float mouseXPos, float mouseYPos) {  //player,player
+//        // @TODO:  Move the square
+//        // 1. calculate distance between bullet and square
+//        double a = (mouseXPos - bullet.xPosition);
+//        double b = (mouseYPos - bullet.yPosition);
+//        double distance = Math.sqrt((a*a) + (b*b));
+//
+//        // 2. calculate the "rate" to move
+//        double xn = (a / distance);
+//        double yn = (b / distance);
+//
+//        // 3. move the bullet
+//        bullet.xPosition = bullet.xPosition + (int)(xn * bullet.getSpeed());
+//        bullet.yPosition = bullet.yPosition + (int)(yn * bullet.getSpeed());
+//    }
     //---------------------------
-
-
-
-
-
-
 
 
     private void printScreenInfo() {
@@ -212,6 +194,7 @@ public void moveBulletToTarget(Square bullet) {
     private void spawnPlayer() {
         //@TODO: Start the player at the left side of screen
     }
+
     private void spawnEnemyShips() {
         Random random = new Random();
 
@@ -254,7 +237,6 @@ public void moveBulletToTarget(Square bullet) {
     // ------------------------------
 
     int count = 0;
-
 
     public enum Direction {
         UP,
@@ -310,7 +292,9 @@ public void moveBulletToTarget(Square bullet) {
 //        }
 
 
-
+        //-----------
+///player.setxpos(player.x)
+//==========
         // MAKE ENEMY MOVE
         // - enemy moves left forever
         // - when enemy touches LEFT wall, respawn on RIGHT SIDE
@@ -328,12 +312,13 @@ public void moveBulletToTarget(Square bullet) {
 //        }
 
 
-
-
         // DEAL WITH BULLETS
+        player.setxPosition(player.x);
+        player.setyPosition(player.y);
+        player.updateHitbox();
 
         // Shoot a bullet every (5) iterations of the loop
-        if (numLoops % 20  == 0) {
+        if (numLoops % 20 == 0) {
             this.enemy1.spawnBullet();
         }
         //----------------------------------------------------------------------------------
@@ -358,11 +343,11 @@ public void moveBulletToTarget(Square bullet) {
             enemy9.updateHitbox();
 
 
-
             if (enemy1.yPosition > BOTTOM_OF_SCREEN) {
                 bulletDirection = Direction.UP;
             }
         }
+
         if (bulletDirection == Direction.UP) {
             enemy1.yPosition = enemy1.yPosition - 10;
             enemy1.updateHitbox();
@@ -394,23 +379,23 @@ public void moveBulletToTarget(Square bullet) {
                 bulletDirection = Direction.DOWN;
             }
         }
-        for (int  j= 0; j < this.bull.size();j++) {
-            Square b = this.bull.get(j);
-            moveBulletToMouse(b, this.mouseX, this.mouseY);
-
-        }
+//        for (int  j= 0; j < this.bull.size();j++) {
+//            Square b = this.bull.get(j);
+//            moveBulletToMouse(b, this.mouseX, this.mouseY);
+//
+//        }
         //-----------------------------------------------------------------------------
 
         // MOVING THE BULLETS
         int BULLET_SPEED = 20;
-        for (int i = 0; i < this.enemy1.getBullets().size();i++) {
+        for (int i = 0; i < this.enemy1.getBullets().size(); i++) {
             Rect bullet = this.enemy1.getBullets().get(i);
             bullet.left = bullet.left - BULLET_SPEED;
             bullet.right = bullet.right - BULLET_SPEED;
         }
 
         // COLLISION DETECTION ON THE BULLET AND WALL
-        for (int i = 0; i < this.enemy1.getBullets().size();i++) {
+        for (int i = 0; i < this.enemy1.getBullets().size(); i++) {
             Rect bullet = this.enemy1.getBullets().get(i);
 
             // For each bullet, check if teh bullet touched the wall
@@ -421,7 +406,7 @@ public void moveBulletToTarget(Square bullet) {
         }
 
         // COLLISION DETECTION BETWEEN BULLET AND PLAYER
-        for (int i = 0; i < this.enemy1.getBullets().size();i++) {
+        for (int i = 0; i < this.enemy1.getBullets().size(); i++) {
             Rect bullet = this.enemy1.getBullets().get(i);
 
             if (this.player.getHitbox().intersect(bullet)) {
@@ -435,12 +420,11 @@ public void moveBulletToTarget(Square bullet) {
         // COLLISION DETECTION BETWEEN BULLET AND enemy
 
 
-
-        for (int i = 0; i < this.player.getBullets().size();i++) {
+        for (int i = 0; i < this.player.getBullets().size(); i++) {
             Rect bullet = this.player.getBullets().get(i);
 
             if (this.enemy1.getHitbox().intersect(bullet)) {
-              enemyList.remove(enemy1);
+                enemyList.remove(enemy1);
                 this.player.getBullets().remove(bullet);
 
                 this.enemy1.removeHitbox();
@@ -452,7 +436,7 @@ public void moveBulletToTarget(Square bullet) {
 
 
         // COLLISION DETECTION BETWEEN BULLET AND enemy
-        for (int i = 0; i < this.player.getBullets().size();i++) {
+        for (int i = 0; i < this.player.getBullets().size(); i++) {
             Rect bullet = this.player.getBullets().get(i);
 
             if (this.enemy2.getHitbox().intersect(bullet)) {
@@ -468,7 +452,7 @@ public void moveBulletToTarget(Square bullet) {
         }
 
         // COLLISION DETECTION BETWEEN BULLET AND enemy
-        for (int i = 0; i < this.player.getBullets().size();i++) {
+        for (int i = 0; i < this.player.getBullets().size(); i++) {
             Rect bullet = this.player.getBullets().get(i);
 
             if (this.enemy3.getHitbox().intersect(bullet)) {
@@ -481,7 +465,7 @@ public void moveBulletToTarget(Square bullet) {
 
         }
         // COLLISION DETECTION BETWEEN BULLET AND enemy
-        for (int i = 0; i < this.player.getBullets().size();i++) {
+        for (int i = 0; i < this.player.getBullets().size(); i++) {
             Rect bullet = this.player.getBullets().get(i);
 
             if (this.enemy4.getHitbox().intersect(bullet)) {
@@ -494,7 +478,7 @@ public void moveBulletToTarget(Square bullet) {
 
         }
         // COLLISION DETECTION BETWEEN BULLET AND enemy
-        for (int i = 0; i < this.player.getBullets().size();i++) {
+        for (int i = 0; i < this.player.getBullets().size(); i++) {
             Rect bullet = this.player.getBullets().get(i);
 
             if (this.enemy5.getHitbox().intersect(bullet)) {
@@ -507,7 +491,7 @@ public void moveBulletToTarget(Square bullet) {
 
         }
         // COLLISION DETECTION BETWEEN BULLET AND enemy
-        for (int i = 0; i < this.player.getBullets().size();i++) {
+        for (int i = 0; i < this.player.getBullets().size(); i++) {
             Rect bullet = this.player.getBullets().get(i);
 
             if (this.enemy6.getHitbox().intersect(bullet)) {
@@ -520,41 +504,39 @@ public void moveBulletToTarget(Square bullet) {
 
         }
         // COLLISION DETECTION BETWEEN BULLET AND enemy
-        for (int i = 0; i < this.player.getBullets().size();i++) {
+        for (int i = 0; i < this.player.getBullets().size(); i++) {
             Rect bullet = this.player.getBullets().get(i);
 
             if (this.enemy7.getHitbox().intersect(bullet)) {
                 enemyList.remove(enemy7);
                 this.player.getBullets().remove(bullet);
-                this.enemy7.removeHitbox();
-
+//                this.enemy7.removeHitbox();
                 this.player.updateHitbox();
                 lives = lives - 1;
             }
 
         }
         // COLLISION DETECTION BETWEEN BULLET AND enemy
-        for (int i = 0; i < this.player.getBullets().size();i++) {
+        for (int i = 0; i < this.player.getBullets().size(); i++) {
             Rect bullet = this.player.getBullets().get(i);
 
             if (this.enemy8.getHitbox().intersect(bullet)) {
                 enemyList.remove(enemy8);
                 this.player.getBullets().remove(bullet);
-                this.enemy8.removeHitbox();
-
+//                this.enemy8.removeHitbox();
                 this.player.updateHitbox();
                 lives = lives - 1;
             }
 
         }
-        for (int i = 0; i < this.player.getBullets().size();i++) {
+        for (int i = 0; i < this.player.getBullets().size(); i++) {
             Rect bullet = this.player.getBullets().get(i);
 
             if (this.enemy9.getHitbox().intersect(bullet)) {
                 enemyList.remove(enemy9);
                 this.player.getBullets().remove(bullet);
-                this.enemy9.removeHitbox();
-                this.player.updateHitbox();
+//                this.enemy9.removeHitbox();
+//                this.player.updateHitbox();
                 lives = lives - 1;
             }
 
@@ -564,18 +546,17 @@ public void moveBulletToTarget(Square bullet) {
 //        movePlayerToMouse(player,this.mouseX,this.mouseY);
 
 
-
         // DEAL WITH player BULLETS
 
         // Shoot a bullet every (5) iterations of the loop
-        if (numLoops % 20  == 0) {
+        if (numLoops % 20 == 0) {
             this.player.spawnBullet();
         }
 
 
         // MOVING THE BULLETS
 //        int BULLET_SPEED = 20;
-        for (int i = 0; i < this.player.getBullets().size();i++) {
+        for (int i = 0; i < this.player.getBullets().size(); i++) {
             Rect bullet = this.player.getBullets().get(i);
 
             bullet.right = bullet.right + BULLET_SPEED;
@@ -583,7 +564,7 @@ public void moveBulletToTarget(Square bullet) {
         }
 
         // COLLISION DETECTION ON THE BULLET AND WALL
-        for (int i = 0; i < this.player.getBullets().size();i++) {
+        for (int i = 0; i < this.player.getBullets().size(); i++) {
             Rect bullet = this.player.getBullets().get(i);
 
             // For each bullet, check if teh bullet touched the wall
@@ -592,9 +573,6 @@ public void moveBulletToTarget(Square bullet) {
             }
 
         }
-
-
-
 
 
         // MAKE ENEMY2 MOVE
@@ -656,9 +634,6 @@ public void moveBulletToTarget(Square bullet) {
 //        }
 
 
-
-
-
     }
 
     public void redrawSprites() {
@@ -668,9 +643,8 @@ public void moveBulletToTarget(Square bullet) {
             //----------------
 
 
-
             // configure the drawing tools
-            this.canvas.drawColor(Color.argb(255,255,255,255));
+            this.canvas.drawColor(Color.argb(255, 255, 255, 255));
             paintbrush.setColor(Color.WHITE);
 
 
@@ -695,27 +669,24 @@ public void moveBulletToTarget(Square bullet) {
                     paintbrush);
 
 
-
             // draw player graphic on screen
-//            canvas.drawBitmap(player.getImage(), player.getxPosition(), player.getyPosition(), paintbrush);
-//
-//            paintbrush.setColor(Color.RED);
-//
+            canvas.drawBitmap(player.getImage(), player.getxPosition(), player.getyPosition(), paintbrush);
+
+            paintbrush.setColor(Color.RED);
+
 //
 //            // draw the player's hitbox
-//            canvas.drawRect(player.getHitbox(), paintbrush);
+            canvas.drawRect(player.getHitbox(), paintbrush);
 
             //drawing the array of eneimes
 
-            for (int i = 0; i < enemyList.size(); i++) {
-                Enemy b = enemyList.get(i);
-                canvas.drawRect(b.getHitbox(), paintbrush);
-                canvas.drawBitmap(b.getImage(), b.getxPosition(), b.getyPosition(), paintbrush);
-
-
-
-            }
-
+//            for (int i = 0; i < enemyList.size(); i++) {
+//                Enemy b = enemyList.get(i);
+//                canvas.drawRect(b.getHitbox(), paintbrush);
+//                canvas.drawBitmap(b.getImage(), b.getxPosition(), b.getyPosition(), paintbrush);
+//
+//
+//            }
 
 
             // draw bullet on screen
@@ -731,34 +702,31 @@ public void moveBulletToTarget(Square bullet) {
 
 
             // draw bullet==================================================
-            paintbrush.setColor(Color.YELLOW);
-
-            for (int i = 0; i < this.bull.size();i++) {
-                Square b = this.bull.get(i);
-//                canvas.drawRect(
-//                        b.getxPosition(),
-//                        b.getyPosition(),
-//                        b.getxPosition() + b.getWidth(),
-//                        b.getyPosition() + b.getWidth(),
-//                        paintbrush
-//                );
-                canvas.drawBitmap(b.getImage(), b.getxPosition()+b.getWidth() , b.getyPosition()+b.getWidth(), paintbrush);
-
-            }
-
-            paintbrush.setColor(Color.RED);
-
-
-            // draw the player's hitbox
-            canvas.drawRect(player.getHitbox(), paintbrush);
-
-            // draw enemy
-            paintbrush.setColor(Color.MAGENTA);
+//            paintbrush.setColor(Color.YELLOW);
+//
+//            for (int i = 0; i < this.bull.size();i++) {
+//                Square b = this.bull.get(i);
+////                canvas.drawRect(
+////                        b.getxPosition(),
+////                        b.getyPosition(),
+////                        b.getxPosition() + b.getWidth(),
+////                        b.getyPosition() + b.getWidth(),
+////                        paintbrush
+////                );
+//                canvas.drawBitmap(b.getImage(), b.getxPosition()+b.getWidth() , b.getyPosition()+b.getWidth(), paintbrush);
+//
+//            }
+//
+//            paintbrush.setColor(Color.RED);
+//
+//
+//            // draw the player's hitbox
+//            canvas.drawRect(player.getHitbox(), paintbrush);
+//
+//            // draw enemy
+//            paintbrush.setColor(Color.MAGENTA);
 
 //===============================================================================
-
-
-
 
 
             // DRAW GAME STATS
@@ -779,7 +747,6 @@ public void moveBulletToTarget(Square bullet) {
             );
 
 
-
             //----------------
             this.holder.unlockCanvasAndPost(canvas);
         }
@@ -788,8 +755,7 @@ public void moveBulletToTarget(Square bullet) {
     public void setFPS() {
         try {
             gameThread.sleep(120);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
 
         }
     }
@@ -799,20 +765,20 @@ public void moveBulletToTarget(Square bullet) {
     // ------------------------------
 
 
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        //@TODO: What should happen when person touches the screen?
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_UP:
+                player.x = (int) event.getX();
+                player.y = (int) event.getY();
 
+                Log.d("PUSH", "PERSON CLICKED AT: (" + event.getX() + "," + event.getY() + ")");
                 break;
             case MotionEvent.ACTION_DOWN:
-                this.mouseX = event.getX();
-                this.mouseY = event.getY();
+
                 break;
         }
-            return true; //processed
-        }
+        return true;
+    }
 
 }

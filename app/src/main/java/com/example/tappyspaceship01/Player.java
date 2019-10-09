@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class Player {
 
+    public int y;
+    public int x;
     // PROPERTIES
     private Bitmap image;
     private Rect hitbox;

@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
+import java.util.ArrayList;
+
 
 public class Square {
 
@@ -16,6 +18,9 @@ public class Square {
     public int yPosition;
     public int width;
     private int speed;
+    private ArrayList<Rect> bullets = new ArrayList<Rect>();
+    private final int BULLET_WIDTH = 15;
+
     public Square(Context context, int x, int y, int width, int speed) {
         this.xPosition = x;
         this.yPosition = y;
@@ -88,7 +93,27 @@ public class Square {
         this.hitbox.bottom = this.yPosition + this.image.getHeight();
     }
 
+    public ArrayList<Rect> getBullets() {
+        return bullets;
+    }
+    public void spawnBullet() {
+        // make bullet come out of middle of enemty
+        Rect bullet = new Rect(this.xPosition + image.getWidth(),
+                this.yPosition + this.image.getHeight() / 2,
+                this.xPosition + BULLET_WIDTH + image.getWidth(),
+                this.yPosition + this.image.getHeight() / 2 + BULLET_WIDTH
+        );
 
+        this.bullets.add(bullet);
+    }
+    public void setBullets(ArrayList<Rect> bullets) {
+        this.bullets = bullets;
+    }
+
+
+    public int getBulletWidth() {
+        return BULLET_WIDTH;
+    }
 
 }
 
