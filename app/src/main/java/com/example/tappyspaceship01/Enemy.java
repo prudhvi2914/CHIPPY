@@ -15,32 +15,33 @@ public class Enemy {
     private Bitmap image;
     private Bitmap bullet;
     private Rect hitbox;
+    private Bitmap image2;
+    private Bitmap image3;
 
     public int xPosition;
     public int yPosition;
+
+
+
+    ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
+//bitmapArray.add(myBitMap); // Add a bitmap
+//bitmapArray.get(0); // Get first bitmap
 
     // Give your enemy some bullets
     // I am using a Rect object because I am lazy and
     // I don't want to manage another set of hitbox
     // I will be using the Rect object's built in interect functions
     private ArrayList<Rect> bullets = new ArrayList<Rect>();
-    private final int BULLET_WIDTH = 15;
+    private final int BULLET_WIDTH = 35;
 
-    public Enemy(Context context, int x, int y) {
+    public Enemy(Context context, int x, int y, Bitmap image, Rect hitbox ) {
         // 1. set up the initial position of the Enemy
         this.xPosition = x;
         this.yPosition = y;
+        this.image = image;
+        this.hitbox = hitbox;
 
-        // 2. Set the default image - all enemies have same image
-        this.image = BitmapFactory.decodeResource(context.getResources(), R.drawable.newalien);
 
-        // 3. Set the default hitbox - all enemies have same hitbox
-        this.hitbox = new Rect(
-                this.xPosition,
-                this.yPosition,
-                this.xPosition + this.image.getWidth(),
-                this.yPosition + this.image.getHeight()
-        );
     }
 
     // Getter and setters
@@ -55,14 +56,20 @@ public class Enemy {
     }
 
     public Rect getHitbox() {
+
         return hitbox;
     }
 
     public void setHitbox(Rect hitbox) {
+
+
         this.hitbox = hitbox;
     }
 
     public int getxPosition() {
+
+
+
         return xPosition;
     }
 
@@ -91,18 +98,21 @@ public class Enemy {
         return BULLET_WIDTH;
     }
 
-    public void updateHitbox() {
-        this.hitbox.left = this.xPosition;
-        this.hitbox.top = this.yPosition;
-        this.hitbox.right = this.xPosition + this.image.getWidth();
-        this.hitbox.bottom = this.yPosition + this.image.getHeight();
-    }
-    public void removeHitbox() {
-        this.hitbox.left = -3000;
-        this.hitbox.top = -3000;
-        this.hitbox.right = -3000;
-        this.hitbox.bottom = -3000;
-    }
+//    public void updateHitbox() {
+//        this.hitbox.left = this.xPosition;
+//        this.hitbox.top = this.yPosition;
+//        this.hitbox.right = this.xPosition + this.image.getWidth();
+//        this.hitbox.bottom = this.yPosition + this.image.getHeight();
+//    }
+//    public void removeHitbox() {
+//
+//        this.hitbox.left = 1200;
+//        this.hitbox.top = 450;
+//        this.hitbox.right = 1264;
+//        this.hitbox.bottom = 514;
+//
+//
+//    }
 
     // Make a new bullet
     public void spawnBullet() {
