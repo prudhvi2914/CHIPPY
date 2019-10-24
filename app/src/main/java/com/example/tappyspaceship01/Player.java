@@ -120,15 +120,25 @@ public class Player {
         this.bullets.add(bullet);
     }
 
+//    public void spawnPower() {
+//        // make bullet come out of middle of enemty
+//        Rect bullet = new Rect(this.xPosition + image.getWidth(),
+//                this.yPosition + this.image.getHeight() / 2,
+//                this.xPosition + BULLET_WIDTH + image.getWidth(),
+//                this.yPosition + this.image.getHeight() / 2 + BULLET_WIDTH
+     //  );
+//
+//        this.bullets.add(bullet);
+//    }
+
+
 
     public static void touchDown(float tx,float ty){
 
     }
 
     public static void touchMove(float tx, float ty){
-//        player.xPosition = (int) tx;
 
-//        player.yPosition = (int) ty;
     }
     public static void touchRelease(float tx,float ty){
 

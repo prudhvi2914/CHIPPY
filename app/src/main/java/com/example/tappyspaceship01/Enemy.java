@@ -98,21 +98,13 @@ public class Enemy {
         return BULLET_WIDTH;
     }
 
-//    public void updateHitbox() {
-//        this.hitbox.left = this.xPosition;
-//        this.hitbox.top = this.yPosition;
-//        this.hitbox.right = this.xPosition + this.image.getWidth();
-//        this.hitbox.bottom = this.yPosition + this.image.getHeight();
-//    }
-//    public void removeHitbox() {
-//
-//        this.hitbox.left = 1200;
-//        this.hitbox.top = 450;
-//        this.hitbox.right = 1264;
-//        this.hitbox.bottom = 514;
-//
-//
-//    }
+    public void updateHitbox() {
+        this.hitbox.left = this.xPosition;
+        this.hitbox.top = this.yPosition;
+        this.hitbox.right = this.xPosition + this.image.getWidth();
+        this.hitbox.bottom = this.yPosition + this.image.getHeight();
+    }
+
 
     // Make a new bullet
     public void spawnBullet() {
